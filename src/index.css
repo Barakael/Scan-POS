@@ -6,55 +6,57 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 25% 10%;
+    /* Light mode — #E5E8EF base, #002583 navy, #FFB800 gold */
+    --background: 220 18% 92%;          /* #E5E8EF — soft off-white */
+    --foreground: 222 70% 16%;          /* deep navy text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 25% 10%;
+    --card: 220 25% 98%;                /* near-white cards floating on bg */
+    --card-foreground: 222 70% 16%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 10%;
+    --popover: 220 25% 98%;
+    --popover-foreground: 222 70% 16%;
 
-    --primary: 153 60% 40%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 43 100% 50%;             /* #FFB800 — gold */
+    --primary-foreground: 222 100% 14%; /* dark navy on gold */
 
-    --secondary: 220 15% 92%;
-    --secondary-foreground: 220 25% 10%;
+    --secondary: 222 30% 86%;
+    --secondary-foreground: 222 70% 18%;
 
-    --muted: 220 15% 94%;
-    --muted-foreground: 220 10% 50%;
+    --muted: 220 20% 88%;
+    --muted-foreground: 222 25% 45%;
 
-    --accent: 153 50% 94%;
-    --accent-foreground: 153 60% 30%;
+    --accent: 43 85% 90%;               /* pale gold tint */
+    --accent-foreground: 43 100% 32%;
 
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 153 60% 40%;
+    --border: 220 22% 83%;
+    --input: 220 22% 87%;
+    --ring: 43 100% 50%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 220 25% 8%;
-    --sidebar-foreground: 220 10% 80%;
-    --sidebar-primary: 153 60% 45%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 20% 14%;
-    --sidebar-accent-foreground: 220 10% 90%;
-    --sidebar-border: 220 20% 16%;
-    --sidebar-ring: 153 60% 45%;
+    /* Sidebar — #002583 deep navy */
+    --sidebar-background: 222 100% 26%; /* #002583 */
+    --sidebar-foreground: 220 30% 72%;
+    --sidebar-primary: 43 100% 50%;     /* #FFB800 active gold */
+    --sidebar-primary-foreground: 222 100% 14%;
+    --sidebar-accent: 222 75% 33%;      /* lighter navy hover */
+    --sidebar-accent-foreground: 220 18% 96%;
+    --sidebar-border: 222 80% 20%;
+    --sidebar-ring: 43 100% 50%;
 
     --success: 153 60% 40%;
     --success-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
+    --warning: 43 100% 50%;
+    --warning-foreground: 222 100% 14%;
     --info: 210 80% 55%;
     --info-foreground: 0 0% 100%;
 
-    --chart-1: 153 60% 40%;
-    --chart-2: 210 80% 55%;
-    --chart-3: 38 92% 50%;
+    --chart-1: 43 100% 50%;
+    --chart-2: 222 100% 40%;
+    --chart-3: 153 60% 40%;
     --chart-4: 280 60% 55%;
     --chart-5: 0 72% 55%;
 
@@ -62,33 +64,44 @@
   }
 
   .dark {
-    --background: 220 25% 6%;
-    --foreground: 220 10% 92%;
+    /* Dark mode — #11212D dark navy base, #E5E8EF off-white text, #FFB800 gold */
+    --background: 205 45% 12%;          /* #11212D */
+    --foreground: 220 18% 92%;          /* #E5E8EF */
 
-    --card: 220 25% 10%;
-    --card-foreground: 220 10% 92%;
+    --card: 205 40% 17%;
+    --card-foreground: 220 18% 92%;
 
-    --popover: 220 25% 10%;
-    --popover-foreground: 220 10% 92%;
+    --popover: 205 40% 17%;
+    --popover-foreground: 220 18% 92%;
 
-    --primary: 153 60% 45%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 43 100% 50%;             /* #FFB800 — gold */
+    --primary-foreground: 205 60% 8%;
 
-    --secondary: 220 20% 16%;
-    --secondary-foreground: 220 10% 90%;
+    --secondary: 205 35% 22%;
+    --secondary-foreground: 220 18% 90%;
 
-    --muted: 220 20% 14%;
-    --muted-foreground: 220 10% 55%;
+    --muted: 205 38% 19%;
+    --muted-foreground: 220 15% 55%;
 
-    --accent: 153 40% 12%;
-    --accent-foreground: 153 60% 60%;
+    --accent: 43 55% 16%;               /* dark gold tint */
+    --accent-foreground: 43 100% 62%;
 
     --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 16%;
-    --input: 220 20% 16%;
-    --ring: 153 60% 45%;
+    --border: 205 35% 21%;
+    --input: 205 35% 21%;
+    --ring: 43 100% 50%;
+
+    /* Sidebar — even darker navy in dark mode */
+    --sidebar-background: 205 52% 8%;
+    --sidebar-foreground: 220 18% 60%;
+    --sidebar-primary: 43 100% 50%;     /* #FFB800 */
+    --sidebar-primary-foreground: 205 60% 8%;
+    --sidebar-accent: 205 40% 17%;
+    --sidebar-accent-foreground: 220 18% 90%;
+    --sidebar-border: 205 38% 14%;
+    --sidebar-ring: 43 100% 50%;
   }
 }
 
@@ -104,16 +117,42 @@
 
 @layer utilities {
   .glass-card {
-    @apply bg-card/80 backdrop-blur-xl border border-border/50 shadow-lg;
+    @apply bg-card/90 backdrop-blur-xl border border-border/60 shadow-lg;
   }
+  /* Gold gradient — used on logo mark, buttons, highlights */
   .pos-gradient {
-    background: linear-gradient(135deg, hsl(153 60% 40%), hsl(153 60% 30%));
+    background: linear-gradient(135deg, hsl(43 100% 54%), hsl(43 100% 40%));
   }
+  /* Sidebar — deep navy gradient (light mode) */
   .sidebar-gradient {
-    background: linear-gradient(180deg, hsl(220 25% 8%), hsl(220 25% 5%));
+    background: linear-gradient(180deg, hsl(222 100% 28%), hsl(222 100% 20%));
   }
+  /* Sidebar — darkest navy (dark mode) */
+  .dark .sidebar-gradient {
+    background: linear-gradient(180deg, hsl(205 52% 10%), hsl(205 55% 6%));
+  }
+  /* Gold glow for primary stats */
   .stat-glow {
-    box-shadow: 0 0 20px -5px hsl(153 60% 40% / 0.2);
+    box-shadow: 0 0 24px -4px hsl(43 100% 50% / 0.25);
+  }
+  /* Navy glow for secondary elements */
+  .navy-glow {
+    box-shadow: 0 0 24px -4px hsl(222 100% 40% / 0.20);
+  }
+  /* Active nav item golden underline bar */
+  .nav-active-bar {
+    position: relative;
+  }
+  .nav-active-bar::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 70%;
+    border-radius: 0 2px 2px 0;
+    background: hsl(43 100% 50%);
   }
   .font-mono {
     font-family: 'JetBrains Mono', monospace;
@@ -146,9 +185,15 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(220 15% 80%);
+  background: hsl(222 30% 70%);
   border-radius: 3px;
 }
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(43 100% 50%);
+}
 .dark ::-webkit-scrollbar-thumb {
-  background: hsl(220 20% 20%);
+  background: hsl(205 35% 25%);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: hsl(43 100% 50%);
 }
