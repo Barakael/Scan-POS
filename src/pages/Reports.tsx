@@ -116,19 +116,19 @@ const Reports = () => {
             <ResponsiveContainer width="100%" height={280}>
               {period === 'daily' ? (
                 <AreaChart data={hourlyData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(220 15% 90%)" />
-                  <XAxis dataKey="hour" tick={{ fontSize: 11 }} stroke="hsl(220 10% 50%)" />
-                  <YAxis tick={{ fontSize: 11 }} stroke="hsl(220 10% 50%)" tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
-                  <Tooltip formatter={(value: number) => formatCurrency(value)} contentStyle={{ borderRadius: '8px', fontSize: '12px' }} />
-                  <Area type="monotone" dataKey="total" stroke="hsl(153, 60%, 40%)" fill="hsl(153, 60%, 40%)" fillOpacity={0.2} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(220 22% 83%)" />
+                  <XAxis dataKey="hour" tick={{ fontSize: 11 }} stroke="hsl(222 25% 55%)" />
+                  <YAxis tick={{ fontSize: 11 }} stroke="hsl(222 25% 55%)" tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
+                  <Tooltip formatter={(value: number) => formatCurrency(value)} contentStyle={{ background: 'hsl(220 25% 98%)', border: '1px solid hsl(220 22% 83%)', borderRadius: '8px', fontSize: '12px' }} />
+                  <Area type="monotone" dataKey="total" stroke="hsl(43, 100%, 50%)" fill="hsl(43, 100%, 50%)" fillOpacity={0.15} />
                 </AreaChart>
               ) : (
                 <BarChart data={mockWeeklySales}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(220 15% 90%)" />
-                  <XAxis dataKey="date" tick={{ fontSize: 11 }} stroke="hsl(220 10% 50%)" />
-                  <YAxis tick={{ fontSize: 11 }} stroke="hsl(220 10% 50%)" tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
-                  <Tooltip formatter={(value: number) => formatCurrency(value)} contentStyle={{ borderRadius: '8px', fontSize: '12px' }} />
-                  <Bar dataKey="total" fill="hsl(153, 60%, 40%)" radius={[4, 4, 0, 0]} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(220 22% 83%)" />
+                  <XAxis dataKey="date" tick={{ fontSize: 11 }} stroke="hsl(222 25% 55%)" />
+                  <YAxis tick={{ fontSize: 11 }} stroke="hsl(222 25% 55%)" tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
+                  <Tooltip formatter={(value: number) => formatCurrency(value)} contentStyle={{ background: 'hsl(220 25% 98%)', border: '1px solid hsl(220 22% 83%)', borderRadius: '8px', fontSize: '12px' }} />
+                  <Bar dataKey="total" fill="hsl(43, 100%, 50%)" radius={[4, 4, 0, 0]} />
                 </BarChart>
               )}
             </ResponsiveContainer>
@@ -138,11 +138,11 @@ const Reports = () => {
             <h3 className="text-sm font-semibold text-foreground mb-4">Payment Methods</h3>
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={paymentData} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(220 15% 90%)" />
-                <XAxis type="number" tick={{ fontSize: 11 }} stroke="hsl(220 10% 50%)" tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
-                <YAxis dataKey="method" type="category" tick={{ fontSize: 12 }} stroke="hsl(220 10% 50%)" width={60} />
-                <Tooltip formatter={(value: number) => formatCurrency(value)} contentStyle={{ borderRadius: '8px', fontSize: '12px' }} />
-                <Bar dataKey="total" fill="hsl(210, 80%, 55%)" radius={[0, 4, 4, 0]} />
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(220 22% 83%)" />
+                <XAxis type="number" tick={{ fontSize: 11 }} stroke="hsl(222 25% 55%)" tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
+                <YAxis dataKey="method" type="category" tick={{ fontSize: 12 }} stroke="hsl(222 25% 55%)" width={60} />
+                <Tooltip formatter={(value: number) => formatCurrency(value)} contentStyle={{ background: 'hsl(220 25% 98%)', border: '1px solid hsl(220 22% 83%)', borderRadius: '8px', fontSize: '12px' }} />
+                <Bar dataKey="total" fill="hsl(222, 100%, 40%)" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
