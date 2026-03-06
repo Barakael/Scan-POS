@@ -33,8 +33,12 @@ const Dashboard = () => {
   }, [] as { name: string; value: number }[]);
 
   const COLORS = [
-    'hsl(153, 60%, 40%)', 'hsl(210, 80%, 55%)', 'hsl(38, 92%, 50%)',
-    'hsl(280, 60%, 55%)', 'hsl(0, 72%, 55%)', 'hsl(180, 60%, 40%)',
+    'hsl(43, 100%, 50%)',   // gold
+    'hsl(222, 100%, 40%)',  // navy
+    'hsl(153, 60%, 40%)',   // green
+    'hsl(210, 80%, 55%)',   // blue
+    'hsl(280, 60%, 55%)',   // purple
+    'hsl(0, 72%, 55%)',     // red
   ];
 
   const stats = [
@@ -44,8 +48,8 @@ const Dashboard = () => {
       change: '+12.5%',
       positive: true,
       icon: DollarSign,
-      color: 'text-primary',
-      bg: 'bg-primary/10',
+      color: 'text-warning',
+      bg: 'bg-warning/15',
     },
     {
       title: 'Transactions',
@@ -61,8 +65,8 @@ const Dashboard = () => {
       value: totalProducts.toString(),
       subtitle: `${totalStock} units`,
       icon: Package,
-      color: 'text-warning',
-      bg: 'bg-warning/10',
+      color: 'text-primary',
+      bg: 'bg-primary/10',
     },
     {
       title: 'Low Stock',
@@ -94,7 +98,7 @@ const Dashboard = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="glass-card rounded-xl p-5 stat-glow"
+              className="glass-card rounded-xl p-5 stat-glow border border-border/40 hover:shadow-xl transition-shadow duration-200"
             >
               <div className="flex items-start justify-between mb-3">
                 <div className={`p-2 rounded-lg ${stat.bg}`}>
@@ -102,7 +106,7 @@ const Dashboard = () => {
                 </div>
                 {stat.change && (
                   <span className={`flex items-center gap-1 text-xs font-medium ${
-                    stat.positive ? 'text-primary' : 'text-destructive'
+                    stat.positive ? 'text-warning' : 'text-destructive'
                   }`}>
                     {stat.positive ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                     {stat.change}
@@ -122,14 +126,14 @@ const Dashboard = () => {
             <h3 className="text-sm font-semibold text-foreground mb-4">Weekly Sales Overview</h3>
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={mockWeeklySales}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(220 15% 90%)" />
-                <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="hsl(220 10% 50%)" />
-                <YAxis tick={{ fontSize: 12 }} stroke="hsl(220 10% 50%)" tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(220 22% 83%)" />
+                <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="hsl(222 25% 55%)" />
+                <YAxis tick={{ fontSize: 12 }} stroke="hsl(222 25% 55%)" tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
                 <Tooltip
                   formatter={(value: number) => formatCurrency(value)}
-                  contentStyle={{ background: 'hsl(0 0% 100%)', border: '1px solid hsl(220 15% 90%)', borderRadius: '8px', fontSize: '12px' }}
+                  contentStyle={{ background: 'hsl(220 25% 98%)', border: '1px solid hsl(220 22% 83%)', borderRadius: '8px', fontSize: '12px' }}
                 />
-                <Bar dataKey="total" fill="hsl(153, 60%, 40%)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="total" fill="hsl(43, 100%, 50%)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -152,7 +156,7 @@ const Dashboard = () => {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip contentStyle={{ background: 'hsl(0 0% 100%)', border: '1px solid hsl(220 15% 90%)', borderRadius: '8px', fontSize: '12px' }} />
+                <Tooltip contentStyle={{ background: 'hsl(220 25% 98%)', border: '1px solid hsl(220 22% 83%)', borderRadius: '8px', fontSize: '12px' }} />
               </PieChart>
             </ResponsiveContainer>
             <div className="grid grid-cols-2 gap-2 mt-2">
