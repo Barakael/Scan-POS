@@ -64,7 +64,7 @@ const POS = () => {
 
   return (
     <AppLayout>
-      <div className="flex flex-col lg:flex-row gap-4 h-[calc(100vh-6rem)]">
+      <div className="flex flex-col lg:flex-row gap-4 h-auto lg:h-[calc(100vh-6rem)]">
         {/* Left - Product Grid & Scanner */}
         <div className="flex-1 flex flex-col min-h-0">
           {/* Barcode Input Bar */}

@@ -1,16 +1,22 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 import {
   LayoutDashboard, ShoppingCart, Package, BarChart3,
-  Users, LogOut, Settings, ChevronLeft, ChevronRight, Store
+  Users, LogOut, Settings, ChevronLeft, ChevronRight, Store,
+  Menu, X, Moon, Sun, Maximize, Minimize
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
 const AppSidebar = () => {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme, isFullscreen, toggleFullscreen } = useTheme();
   const location = useLocation();
+  const isMobile = useIsMobile();
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   if (!user) return null;
 
@@ -31,12 +37,112 @@ const AppSidebar = () => {
     cashier: 'Cashier',
   };
 
+  const handleNavClick = () => {
+    if (isMobile) setMobileOpen(false);
+  };
+
+  // Mobile: hamburger bar + slide-over drawer
+  if (isMobile) {
+    return (
+      <>
+        {/* Top bar */}
+        <div className="fixed top-0 left-0 right-0 h-14 bg-sidebar-background border-b border-sidebar-border flex items-center justify-between px-4 z-50">
+          <div className="flex items-center gap-3">
+            <button onClick={() => setMobileOpen(true)} className="text-sidebar-foreground">
+              <Menu className="w-5 h-5" />
+            </button>
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg pos-gradient flex items-center justify-center">
+                <Store className="w-3.5 h-3.5 text-primary-foreground" />
+              </div>
+              <span className="text-sm font-bold text-sidebar-accent-foreground">SwiftPOS</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button onClick={toggleTheme} className="p-2 text-sidebar-foreground hover:text-sidebar-accent-foreground">
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button onClick={toggleFullscreen} className="p-2 text-sidebar-foreground hover:text-sidebar-accent-foreground">
+              {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Overlay */}
+        {mobileOpen && (
+          <div className="fixed inset-0 bg-black/50 z-50" onClick={() => setMobileOpen(false)} />
+        )}
+
+        {/* Slide-over sidebar */}
+        <aside className={cn(
+          "fixed top-0 left-0 h-screen w-64 sidebar-gradient border-r border-sidebar-border z-50 flex flex-col transition-transform duration-300",
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        )}>
+          <div className="flex items-center justify-between px-4 h-14 border-b border-sidebar-border">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg pos-gradient flex items-center justify-center">
+                <Store className="w-3.5 h-3.5 text-primary-foreground" />
+              </div>
+              <span className="text-sm font-bold text-sidebar-accent-foreground">SwiftPOS</span>
+            </div>
+            <button onClick={() => setMobileOpen(false)} className="text-sidebar-foreground">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <nav className="flex-1 py-4 px-2 space-y-1 overflow-auto">
+            {filteredNav.map(item => {
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={handleNavClick}
+                  className={cn(
+                    "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200",
+                    isActive
+                      ? "bg-sidebar-primary/20 text-sidebar-primary font-medium"
+                      : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                  )}
+                >
+                  <item.icon className="w-5 h-5 flex-shrink-0" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="border-t border-sidebar-border p-3">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-8 h-8 rounded-full bg-sidebar-accent flex items-center justify-center">
+                <span className="text-xs font-semibold text-sidebar-accent-foreground">
+                  {user.name.charAt(0)}
+                </span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium text-sidebar-accent-foreground truncate">{user.name}</p>
+                <p className="text-[10px] text-sidebar-foreground">{roleLabel[user.role]}</p>
+              </div>
+            </div>
+            <button
+              onClick={logout}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-sidebar-foreground hover:bg-destructive/20 hover:text-destructive transition-colors w-full"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Logout</span>
+            </button>
+          </div>
+        </aside>
+      </>
+    );
+  }
+
+  // Desktop sidebar
   return (
     <aside className={cn(
       "sidebar-gradient h-screen flex flex-col border-r border-sidebar-border transition-all duration-300 fixed left-0 top-0 z-40",
       collapsed ? "w-16" : "w-64"
     )}>
-      {/* Logo */}
       <div className="flex items-center gap-3 px-4 h-16 border-b border-sidebar-border">
         <div className="w-8 h-8 rounded-lg pos-gradient flex items-center justify-center flex-shrink-0">
           <Store className="w-4 h-4 text-primary-foreground" />
@@ -49,7 +155,6 @@ const AppSidebar = () => {
         )}
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 py-4 px-2 space-y-1">
         {filteredNav.map(item => {
           const isActive = location.pathname === item.path;
@@ -71,7 +176,24 @@ const AppSidebar = () => {
         })}
       </nav>
 
-      {/* User info */}
+      {/* Theme & Fullscreen toggles */}
+      <div className="px-2 py-2 space-y-1 border-t border-sidebar-border">
+        <button
+          onClick={toggleTheme}
+          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors w-full"
+        >
+          {theme === 'dark' ? <Sun className="w-5 h-5 flex-shrink-0" /> : <Moon className="w-5 h-5 flex-shrink-0" />}
+          {!collapsed && <span className="animate-fade-in">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>}
+        </button>
+        <button
+          onClick={toggleFullscreen}
+          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors w-full"
+        >
+          {isFullscreen ? <Minimize className="w-5 h-5 flex-shrink-0" /> : <Maximize className="w-5 h-5 flex-shrink-0" />}
+          {!collapsed && <span className="animate-fade-in">{isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}</span>}
+        </button>
+      </div>
+
       <div className="border-t border-sidebar-border p-3">
         {!collapsed && (
           <div className="flex items-center gap-3 mb-3 animate-fade-in">
