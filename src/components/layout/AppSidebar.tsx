@@ -46,16 +46,16 @@ const AppSidebar = () => {
     return (
       <>
         {/* Top bar */}
-        <div className="fixed top-0 left-0 right-0 h-14 bg-sidebar-background border-b border-sidebar-border flex items-center justify-between px-4 z-50">
-          <div className="flex items-center gap-3">
-            <button onClick={() => setMobileOpen(true)} className="text-sidebar-foreground">
+        <div className="fixed top-0 left-0 right-0 h-14 sidebar-gradient border-b border-sidebar-border flex items-center justify-between px-4 z-50">
+          <div className="flex items-center gap-2">
+            <button onClick={() => setMobileOpen(true)} className="text-sidebar-foreground hover:text-sidebar-primary transition-colors">
               <Menu className="w-5 h-5" />
             </button>
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg pos-gradient flex items-center justify-center">
-                <Store className="w-3.5 h-3.5 text-primary-foreground" />
+              <div className="w-7 h-7 rounded-lg pos-gradient flex items-center justify-center shadow-md ring-2 ring-yellow-400/20">
+                <Store className="w-3.5 h-3.5 text-white" />
               </div>
-              <span className="text-sm font-bold text-sidebar-accent-foreground">SwiftPOS</span>
+              <span className="text-sm font-bold text-white tracking-wide">SwiftPOS</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -75,15 +75,15 @@ const AppSidebar = () => {
 
         {/* Slide-over sidebar */}
         <aside className={cn(
-          "fixed top-0 left-0 h-screen w-64 sidebar-gradient border-r border-sidebar-border z-50 flex flex-col transition-transform duration-300",
+          "fixed top-0 left-0 h-screen w-64 sidebar-gradient border-r border-sidebar-border z-50 flex flex-col transition-transform duration-300 shadow-2xl",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}>
           <div className="flex items-center justify-between px-4 h-14 border-b border-sidebar-border">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg pos-gradient flex items-center justify-center">
-                <Store className="w-3.5 h-3.5 text-primary-foreground" />
+              <div className="w-7 h-7 rounded-lg pos-gradient flex items-center justify-center shadow-md ring-2 ring-yellow-400/20">
+                <Store className="w-3.5 h-3.5 text-white" />
               </div>
-              <span className="text-sm font-bold text-sidebar-accent-foreground">SwiftPOS</span>
+              <span className="text-sm font-bold text-white tracking-wide">SwiftPOS</span>
             </div>
             <button onClick={() => setMobileOpen(false)} className="text-sidebar-foreground">
               <X className="w-5 h-5" />
@@ -99,13 +99,13 @@ const AppSidebar = () => {
                   to={item.path}
                   onClick={handleNavClick}
                   className={cn(
-                    "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200",
+                    "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200 relative",
                     isActive
-                      ? "bg-sidebar-primary/20 text-sidebar-primary font-medium"
+                      ? "bg-sidebar-primary/15 text-sidebar-primary font-semibold nav-active-bar shadow-sm"
                       : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                   )}
                 >
-                  <item.icon className="w-5 h-5 flex-shrink-0" />
+                  <item.icon className={cn("w-5 h-5 flex-shrink-0", isActive && "drop-shadow-sm")} />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -114,8 +114,8 @@ const AppSidebar = () => {
 
           <div className="border-t border-sidebar-border p-3">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full bg-sidebar-accent flex items-center justify-center">
-                <span className="text-xs font-semibold text-sidebar-accent-foreground">
+              <div className="w-8 h-8 rounded-full pos-gradient flex items-center justify-center ring-2 ring-yellow-400/30">
+                <span className="text-xs font-bold text-white">
                   {user.name.charAt(0)}
                 </span>
               </div>
@@ -140,17 +140,17 @@ const AppSidebar = () => {
   // Desktop sidebar
   return (
     <aside className={cn(
-      "sidebar-gradient h-screen flex flex-col border-r border-sidebar-border transition-all duration-300 fixed left-0 top-0 z-40",
+      "sidebar-gradient h-screen flex flex-col border-r border-sidebar-border transition-all duration-300 fixed left-0 top-0 z-40 shadow-2xl",
       collapsed ? "w-16" : "w-64"
     )}>
       <div className="flex items-center gap-3 px-4 h-16 border-b border-sidebar-border">
-        <div className="w-8 h-8 rounded-lg pos-gradient flex items-center justify-center flex-shrink-0">
-          <Store className="w-4 h-4 text-primary-foreground" />
+        <div className="w-8 h-8 rounded-lg pos-gradient flex items-center justify-center flex-shrink-0 shadow-md ring-2 ring-yellow-400/20">
+          <Store className="w-4 h-4 text-white" />
         </div>
         {!collapsed && (
           <div className="animate-fade-in">
-            <h1 className="text-sm font-bold text-sidebar-accent-foreground">SwiftPOS</h1>
-            <p className="text-[10px] text-sidebar-foreground">Inventory & Sales</p>
+            <h1 className="text-sm font-bold text-white tracking-wide">SwiftPOS</h1>
+            <p className="text-[10px] text-sidebar-foreground tracking-wider uppercase">Inventory & Sales</p>
           </div>
         )}
       </div>
@@ -163,13 +163,13 @@ const AppSidebar = () => {
               key={item.path}
               to={item.path}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200",
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200 relative",
                 isActive
-                  ? "bg-sidebar-primary/20 text-sidebar-primary font-medium"
+                  ? "bg-sidebar-primary/15 text-sidebar-primary font-semibold nav-active-bar shadow-sm"
                   : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
               )}
             >
-              <item.icon className="w-5 h-5 flex-shrink-0" />
+              <item.icon className={cn("w-5 h-5 flex-shrink-0", isActive && "drop-shadow-sm")} />
               {!collapsed && <span className="animate-fade-in">{item.label}</span>}
             </Link>
           );
@@ -197,8 +197,8 @@ const AppSidebar = () => {
       <div className="border-t border-sidebar-border p-3">
         {!collapsed && (
           <div className="flex items-center gap-3 mb-3 animate-fade-in">
-            <div className="w-8 h-8 rounded-full bg-sidebar-accent flex items-center justify-center">
-              <span className="text-xs font-semibold text-sidebar-accent-foreground">
+            <div className="w-8 h-8 rounded-full pos-gradient flex items-center justify-center ring-2 ring-yellow-400/30">
+              <span className="text-xs font-bold text-white">
                 {user.name.charAt(0)}
               </span>
             </div>
